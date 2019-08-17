@@ -1,9 +1,16 @@
 #include <iostream>
 #include "logger.h"
+#include "random.h"
+
 
 
 int main(int , const char *[])
 {
+
+  auto r = Random(0.0, 10.0);
+  for (int i = 0; i < 10; i++) {
+    std::cout << "rand: " << r.next() << std::endl;
+  }
 
   return 0;
 }
