@@ -11,6 +11,8 @@ public:
   float threshold() const;
 
   void log(float value);
+  Logger& operator<<(float v);
+
   bool isOverThreshold(float v) const;
 
 private:

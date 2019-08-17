@@ -21,6 +21,11 @@ void Logger::log(float v) {
   }
 }
 
+Logger& Logger::operator<<(float v) {
+  log(v);
+  return *this;
+}
+
 void Logger::setThreshold(float t){
   m_threshold = t;
 }
