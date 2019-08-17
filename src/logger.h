@@ -6,7 +6,7 @@ class Logger;
 class Logger {
 public:
   Logger(int size);
-  void log();
+  void log(float value);
 
 private:
   int m_size;
