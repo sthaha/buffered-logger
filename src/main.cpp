@@ -13,8 +13,8 @@ bool nearlyEqual(float a, float b);
 int main(int , const char *[])
 {
 
-  //testLogAnomaly();
-	testInsertMoreThanBuffer();
+	testLogAnomaly();
+	//testInsertMoreThanBuffer();
   return 0;
 }
 
@@ -36,7 +36,7 @@ void testInsertMoreThanBuffer()
 
 void testLogAnomaly()
 {
-  auto log = Logger(20);
+  Logger log(20);
   log.setThreshold(2.0003)
 		.setOutput("/tmp/record.log");
 
