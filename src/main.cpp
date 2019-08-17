@@ -5,6 +5,7 @@
 
 
 void testInsertMoreThanBuffer();
+void testInsertMoreThanBuffer(size_t bufferSize, int samples);
 void testLogAnomaly();
 
 bool nearlyEqual(float a, float b);
@@ -12,7 +13,8 @@ bool nearlyEqual(float a, float b);
 int main(int , const char *[])
 {
 
-  testLogAnomaly();
+  //testLogAnomaly();
+	testInsertMoreThanBuffer();
   return 0;
 }
 
@@ -21,6 +23,16 @@ bool nearlyEqual(float a, float b)
 {
    return fabs(a - b) <= std::numeric_limits<float>::epsilon();
 }
+
+void testInsertMoreThanBuffer()
+{
+	testInsertMoreThanBuffer(5, 5);
+	testInsertMoreThanBuffer(5, 15);
+	testInsertMoreThanBuffer(5, 13);
+	testInsertMoreThanBuffer(5, 43);
+	testInsertMoreThanBuffer(3, 2);
+}
+
 
 void testLogAnomaly()
 {
@@ -35,23 +47,28 @@ void testLogAnomaly()
   }
 }
 
-void testInsertMoreThanBuffer()
+void testInsertMoreThanBuffer(size_t bufferSize, int samples)
 {
-  auto r = Random(0.0, 10.0);
-  auto buffer = Buffer(5);
+  auto buffer = Buffer(bufferSize);
   std::vector<float> values;
 
-  for (int i = 0; i < 10; i++) {
+	auto r = Random(0.0, 10.0);
+  for (int i = 0; i < samples; i++) {
     auto x = r.next();
     values.push_back(x);
     buffer.push(x);
   }
 
+	std::cerr << "\t- - - - - - - - - - - - - -" << std::endl;
   auto v = values.end() - buffer.size();
   for (auto i : buffer.values()) {
-    std::cout << " ... " << i << " == " << *v << std::endl;
+    std::cout << (nearlyEqual(i, *v) ? "ok" : "FAIL")
+				<< ": " << i << " == " << *v << " : "
+				<< std::endl;
     ++v;
   }
+
+	std::cerr << "---------------------------------------" << std::endl;
 
 }
 
