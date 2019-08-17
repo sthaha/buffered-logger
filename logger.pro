@@ -15,5 +15,7 @@ OBJECTS_DIR=tmp/obj
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += src/logger.h
-SOURCES += src/logger.cpp src/main.cpp
+QT -= gui core
+
+HEADERS += src/*.h
+SOURCES += src/*.cpp
