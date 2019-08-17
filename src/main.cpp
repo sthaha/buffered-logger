@@ -7,15 +7,19 @@
 int main(int , const char *[])
 {
 
+  return 0;
+}
+
+void testRandom()
+{
   auto r = Random(0.0, 10.0);
   for (int i = 0; i < 10; i++) {
     std::cout << "rand: " << r.next() << std::endl;
   }
 
-  return 0;
 }
 
-void logger()
+void testLogger()
 {
   auto l = Logger(20);
   l.setThreshold(8.0003);
