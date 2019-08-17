@@ -4,23 +4,55 @@
 #include "buffer.h"
 
 
+void testInsertMoreThanBuffer();
+void testLogAnomaly();
+
+bool nearlyEqual(float a, float b);
 
 int main(int , const char *[])
 {
 
+  testLogAnomaly();
+  return 0;
+}
+
+
+bool nearlyEqual(float a, float b)
+{
+   return fabs(a - b) <= std::numeric_limits<float>::epsilon();
+}
+
+void testLogAnomaly()
+{
+  auto log = Logger(20);
+  log.setThreshold(2.0003)
+		.setOutput("/tmp/record.log");
+
+
+  auto r = Random(0.0, 10.0);
+  for (int i = 0; i < 80; i++) {
+    log << r.next();
+  }
+}
+
+void testInsertMoreThanBuffer()
+{
   auto r = Random(0.0, 10.0);
   auto buffer = Buffer(5);
+  std::vector<float> values;
 
   for (int i = 0; i < 10; i++) {
     auto x = r.next();
+    values.push_back(x);
     buffer.push(x);
   }
 
+  auto v = values.end() - buffer.size();
   for (auto i : buffer.values()) {
-    std::cout << " ... " << i << std::endl;
+    std::cout << " ... " << i << " == " << *v << std::endl;
+    ++v;
   }
 
-  return 0;
 }
 
 void testBufferUsingVector()
@@ -36,15 +68,13 @@ void testBufferUsingVector()
       index %= 10;
   }
 
-  for (auto it = data.begin()+index ; it < data.end(); ++it)
-  {
+  for (auto it = data.begin()+index ; it < data.end(); ++it) {
       std::cout <<  *it << std::endl;
   }
 
   auto end = data.begin()+index;
 
-  for (auto it = data.begin() ; it != end; ++it)
-  {
+  for (auto it = data.begin() ; it != end; ++it) {
       std::cout <<  *it << std::endl;
   }
 
