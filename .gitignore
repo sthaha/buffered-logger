@@ -30,7 +30,7 @@
 *.exe
 *.out
 *.app
-/logger
+/bin/
 /tmp
 /Makefile
 .qmake*
